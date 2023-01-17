@@ -1,0 +1,22 @@
+.cart {
+  margin-top: 200px;
+  padding: 30px 80px;
+
+  .line {
+    margin: 10px;
+    border: 1px solid gray;
+  }
+
+  .productBox {
+    display: flex;
+    justify-content: space-around;
+
+    .title {
+      display: inline-block;
+      width: 500px;
+      margin-left: 20px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+.detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 200px;
+  padding: 30px 80px;
+
+  .productContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px;
+
+    .title {
+      font-size: 80px;
+      font-weight: 900;
+    }
+
+    .category {
+      color: lightgray;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .description {
+      margin-top: 20px;
+    }
+
+    .price {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .subInfo {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .handleBox {
+      display: flex;
+      align-items: center;
+      margin-top: 50px;
+
+      .quantity {
+        width: 80px;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .quantityBtn {
+        margin-left: 20px;
+        border: none;
+        background-color: white;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+
+    .addCartBtn {
+      padding: 20px;
+      border-radius: 20px;
+      background-color: black;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+}

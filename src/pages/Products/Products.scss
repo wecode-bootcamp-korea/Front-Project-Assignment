@@ -1,0 +1,69 @@
+.products {
+  margin-top: 130px;
+  padding: 30px 80px;
+
+  .filterContainer {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+  }
+
+  .listWrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    place-items: center;
+    gap: 20px 0;
+
+    .cardContainer {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      height: 400px;
+      padding: 10px;
+      overflow: hidden;
+      border: 1px solid lightgray;
+      border-radius: 30px;
+
+      .cardImage {
+        height: 200px;
+        border-radius: 30px;
+      }
+
+      .contentBox {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px 0;
+      }
+    }
+  }
+
+  .buttonWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 10px;
+
+    .pageBtn {
+      width: 40px;
+      padding: 5px 10px;
+      transition: 0.2s all ease-in-out;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      background-color: white;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: blueviolet;
+        color: white;
+      }
+    }
+
+    .clicked {
+      background-color: blueviolet;
+      color: white;
+    }
+  }
+}
