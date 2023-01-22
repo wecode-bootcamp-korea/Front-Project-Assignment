@@ -6,7 +6,7 @@ import UserForm from './pages/UserForm/UserForm';
 import Products from './pages/Products/Products';
 import Detail from './pages/Detail/Detail';
 import Cart from './pages/Cart/Cart';
-import Footer from './components/Footer/Footer';
+// import Footer from './components/Footer/Footer';
 
 export default function Router() {
   return (
@@ -20,7 +20,7 @@ export default function Router() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

@@ -31,6 +31,7 @@
       border: 1px solid lightgray;
       border-radius: 10px;
       background-color: white;
+      cursor: pointer;
     }
 
     .linkTranslationBtn {
@@ -38,6 +39,12 @@
       font-size: 12px;
       text-align: center;
       cursor: pointer;
+    }
+
+    .invalidpwconfirm {
+      padding-left: 4px;
+      color: red;
+      font-size: 10px;
     }
   }
 }
