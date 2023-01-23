@@ -14,7 +14,25 @@ const Products = () => {
       });
   }, []);
 
-  const filterProducts = e => {};
+  console.log(productsList);
+
+  const filterProducts = e => {
+    if (e.target.value === 'price') {
+      productsList.sort((a, b) => a.price - b.price);
+      const sorted = [...productsList];
+      setProductsList(sorted);
+    }
+    if (e.target.value === 'rating') {
+      productsList.sort((a, b) => b.rating - a.rating);
+      const sorted = [...productsList];
+      setProductsList(sorted);
+    }
+    if (e.target.value === 'discountPercentage') {
+      productsList.sort((a, b) => b.discountPercentage - a.discountPercentage);
+      const sorted = [...productsList];
+      setProductsList(sorted);
+    }
+  };
 
   return (
     <div className="products">
@@ -30,12 +48,16 @@ const Products = () => {
         {productsList.map(list => {
           return (
             <div key={list.id} className="cardContainer">
-              <img alt={list.title} className="cardImage" />
+              <img
+                src={list.thumbnail}
+                alt={list.title}
+                className="cardImage"
+              />
               <div className="contentBox">
-                <span>상품명 : </span>
-                <span>가격 : $</span>
-                <span>별점 : </span>
-                <span>할인율 : %</span>
+                <span>상품명 : {list.title}</span>
+                <span>가격 : $ {list.price}</span>
+                <span>별점 : {list.rating}</span>
+                <span>할인율 : {list.discountPercentage}% </span>
               </div>
             </div>
           );
