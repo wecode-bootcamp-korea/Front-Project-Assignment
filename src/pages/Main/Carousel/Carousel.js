@@ -1,9 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Carousel.scss';
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const imageBox = useRef();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (currentIndex === 4) {
+        setCurrentIndex(0);
+      } else {
+        setCurrentIndex(currentIndex + 1);
+      }
+    }, 5000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [currentIndex]);
 
   const displayNextImage = () => {
     if (currentIndex !== IMAGE_LIST.length - 1) {
@@ -11,6 +24,11 @@ const Carousel = () => {
         (currentIndex + 1) * 100
       }vw)`;
       setCurrentIndex(prev => prev + 1);
+    } else {
+      imageBox.current.style.transform = `translateX(-${
+        (currentIndex - 4) * 100
+      }vw)`;
+      setCurrentIndex(0);
     }
   };
 
@@ -21,6 +39,10 @@ const Carousel = () => {
       }vw)`;
       setCurrentIndex(prev => prev - 1);
     }
+  };
+
+  const moveIndex = index => {
+    setCurrentIndex(index);
   };
 
   return (
@@ -37,7 +59,7 @@ const Carousel = () => {
             return (
               <div key={number} className="content">
                 <img
-                  src={`/images/0${number}.png`}
+                  src={`/images/0${currentIndex + 1}.png`}
                   alt={number}
                   className="contentImage"
                 />
@@ -52,11 +74,12 @@ const Carousel = () => {
         >{`>`}</button>
       </div>
       <div className="dotContainer">
-        {IMAGE_LIST.map(list => {
+        {IMAGE_LIST.map((list, index) => {
           return (
             <div
-              key={list}
+              key={index}
               className={`dot ${currentIndex === list - 1 && 'current'}`}
+              onClick={() => moveIndex(index)}
             />
           );
         })}
