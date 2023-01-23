@@ -5,15 +5,30 @@ import './Detail.scss';
 const Detail = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
-  const params = useParams();
 
+  const params = useParams();
+  const paramsId = params.id;
   useEffect(() => {
-    fetch(`https://dummyjson.com/products`)
-      .then(res => res.json())
+    fetch(`https://dummyjson.com/products/${paramsId}`)
+      .then(res => {
+        if (!res.ok) {
+          throw Error('Error!');
+        }
+        return res.json();
+      })
       .then(data => setProduct(data));
   }, []);
 
-  const calculateQuantity = e => {};
+  const calculateQuantity = e => {
+    if (e === 'plus') {
+      setQuantity(quantity + 1);
+    } else {
+      if (quantity === 1) {
+        return;
+      }
+      setQuantity(quantity - 1);
+    }
+  };
 
   const addCart = () => {
     fetch('https://dummyjson.com/carts/add', {
@@ -23,8 +38,8 @@ const Detail = () => {
         userId: 1,
         products: [
           {
-            id: 1,
-            quantity: 1,
+            id: product.id,
+            quantity: quantity,
           },
         ],
       }),
@@ -36,27 +51,28 @@ const Detail = () => {
   return (
     <div className="detail">
       <div className="imageContainer">
-        <img src="" alt={product.title} />
+        <img src={product.thumbnail} alt={product.title} />
       </div>
       <div className="productContent">
-        <span className="title">타이틀</span>
-        <span className="category">카테고리</span>
-        <span className="description">설명</span>
-        <span className="price">가격 : $</span>
-        <span className="subInfo">평점 : </span>
+        <span className="title">{product.title}</span>
+        <span className="category">{product.category}</span>
+        <span className="description">{product.description}</span>
+        <span className="price">가격 : ${product.price}</span>
+        <span className="subInfo">평점 : {product.rating}</span>
         <div className="handleBox">
-          <span className="quantity"> 수량 : 개</span>
+          <span className="quantity"> 수량 : {quantity}개</span>
           <button
             className="quantityBtn"
             name="plus"
-            onClick={calculateQuantity}
+            onClick={() => calculateQuantity('plus')}
           >
             +
           </button>
+
           <button
             className="quantityBtn"
             name="minus"
-            onClick={calculateQuantity}
+            onClick={() => calculateQuantity('mius')}
           >
             -
           </button>

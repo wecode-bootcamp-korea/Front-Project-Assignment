@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import './Nav.scss';
 
 const Nav = () => {
@@ -11,7 +11,17 @@ const Nav = () => {
     setSearchText(e.target.value);
   };
 
-  const goToDetail = id => {};
+  const goToDetail = id => {
+    navigate(`/detail/${id}`);
+  };
+  const clear = () => {
+    localStorage.clear();
+  };
+  useEffect(() => {
+    fetch(`https://dummyjson.com/products`)
+      .then(res => res.json())
+      .then(res => setSearchList(res.products));
+  }, []);
 
   return (
     <nav className="nav">
@@ -26,22 +36,28 @@ const Nav = () => {
             value={searchText}
             onChange={searchProdut}
           />
-          <div className="searchBox">
-            {searchList.map(list => {
-              return (
-                <span
-                  key={list.id}
-                  className="result"
-                  onClick={() => goToDetail(list.id)}
-                >
-                  {list.title}
-                </span>
-              );
-            })}
-          </div>
+          {searchText === '' ? (
+            ''
+          ) : (
+            <div className="searchBox">
+              {searchList
+                .filter(title => title.title.includes(searchText))
+                .map(list => {
+                  return (
+                    <span
+                      key={list.id}
+                      className="result"
+                      onClick={() => goToDetail(list.id)}
+                    >
+                      {list.title}
+                    </span>
+                  );
+                })}
+            </div>
+          )}
         </div>
-        <Link className="loginBtn" to="/login">
-          로그인
+        <Link className="loginBtn" to="/login" onClick={clear}>
+          {localStorage.getItem('yjkl92') ? '로그아웃' : '로그인'}
         </Link>
       </div>
       <div className="menuTab">

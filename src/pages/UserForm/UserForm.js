@@ -1,19 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './UserForm.scss';
+import Form from './Form';
+import { useLocation } from 'react-router-dom';
 
 const UserForm = () => {
+  const location = useLocation();
+  const LOGIN_DATA = {
+    title: '로그인',
+    text: '계정이 없으신가요?',
+    url: '/signup',
+  };
+  const SINGNUP_DATA = {
+    title: '회원가입',
+    text: '이미 가입하셨나요?',
+    url: '/login',
+  };
   return (
     <div className="userForm">
-      <form className="userContainer">
-        <span className="title">Login</span>
-        <input className="userInput" placeholder="아이디" />
-        <input className="userInput" placeholder="비밀번호" />
-        <button className="formButton">Login</button>
-        <Link to="/signup" className="linkTranslationBtn">
-          아직 회원이 아니신가요?
-        </Link>
-      </form>
+      <Form
+        data={
+          location.pathname === SINGNUP_DATA.url ? LOGIN_DATA : SINGNUP_DATA
+        }
+      />
     </div>
   );
 };

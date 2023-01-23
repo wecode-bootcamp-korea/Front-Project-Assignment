@@ -18,7 +18,7 @@ export default function Router() {
         <Route path="/signup" element={<UserForm />} />
         <Route path="/products" element={<Products />} />
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart/:id" element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>

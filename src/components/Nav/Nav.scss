@@ -1,7 +1,7 @@
 .nav {
   position: fixed;
   top: 0;
-
+  z-index: 1000;
   width: 100vw;
   padding: 30px;
   border-bottom: 1px solid lightgray;
@@ -38,7 +38,6 @@
         flex-direction: column;
         width: 100%;
         max-height: 150px;
-        margin-top: 20px;
         padding: 20px;
         overflow: scroll;
         border: 1px solid lightgray;
@@ -49,6 +48,9 @@
         .result {
           cursor: pointer;
         }
+      }
+      .searchBox::-webkit-scrollbar {
+        display: none;
       }
     }
 
