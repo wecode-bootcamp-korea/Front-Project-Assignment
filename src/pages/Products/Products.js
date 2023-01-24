@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './Products.scss';
 
 const Products = () => {
   const [productsList, setProductsList] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const skip = searchParams.get('skip');
 
   useEffect(() => {
-    fetch('https://dummyjson.com/products')
+    fetch(`https://dummyjson.com/products?limit=10&skip=${skip}`)
       .then(res => res.json())
       .then(data => {
         setProductsList(data.products);
         setTotalProduct(Math.floor(data.total / 10));
       });
-  }, []);
+  }, [skip]);
 
-  console.log(productsList);
+  const movePage = pageNumber => {
+    searchParams.set('skip', (pageNumber - 1) * 10);
+    setSearchParams(searchParams);
+  };
 
   const filterProducts = e => {
     if (e.target.value === 'price') {
@@ -45,25 +51,36 @@ const Products = () => {
         </select>
       </div>
       <div className="listWrap">
-        {productsList.map(list => {
-          return (
-            <div key={list.id} className="cardContainer">
-              <img
-                src={list.thumbnail}
-                alt={list.title}
-                className="cardImage"
-              />
-              <div className="contentBox">
-                <span>상품명 : {list.title}</span>
-                <span>가격 : $ {list.price}</span>
-                <span>별점 : {list.rating}</span>
-                <span>할인율 : {list.discountPercentage}% </span>
+        {productsList &&
+          productsList.map(list => {
+            return (
+              <div key={list.id} className="cardContainer">
+                <img
+                  src={list.thumbnail}
+                  alt={list.title}
+                  className="cardImage"
+                />
+                <div className="contentBox">
+                  <span>상품명 : {list.title}</span>
+                  <span>가격 : $ {list.price}</span>
+                  <span>별점 : {list.rating}</span>
+                  <span>할인율 : {list.discountPercentage}% </span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
-      <div className="buttonWrap" />
+      <div className="buttonWrap">
+        <button className="pageBtn" onClick={() => movePage(1)}>
+          1
+        </button>
+        <button className="pageBtn" onClick={() => movePage(2)}>
+          2
+        </button>
+        <button className="pageBtn" onClick={() => movePage(3)}>
+          3
+        </button>
+      </div>
     </div>
   );
 };
