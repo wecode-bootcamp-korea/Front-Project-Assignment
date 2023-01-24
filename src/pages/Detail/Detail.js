@@ -13,7 +13,11 @@ const Detail = () => {
       .then(data => setProduct(data));
   }, [params.id]);
 
-  const calculateQuantity = e => {};
+  const calculateQuantity = e => {
+    e.target.name === 'plus'
+      ? setQuantity(quantity + 1)
+      : quantity > 1 && setQuantity(quantity - 1);
+  };
 
   const addCart = () => {
     fetch('https://dummyjson.com/carts/add', {
@@ -23,8 +27,8 @@ const Detail = () => {
         userId: 1,
         products: [
           {
-            id: 1,
-            quantity: 1,
+            id: params.id,
+            quantity: quantity,
           },
         ],
       }),
