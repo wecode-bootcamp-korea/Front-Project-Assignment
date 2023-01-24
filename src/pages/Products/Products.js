@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Products.scss';
 
 const Products = () => {
@@ -7,6 +8,7 @@ const Products = () => {
   const [totalProduct, setTotalProduct] = useState(0);
   const [searchParams, setSearchParams] = useSearchParams();
   const skip = searchParams.get('skip');
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products?limit=10&skip=${skip}`)
@@ -55,11 +57,13 @@ const Products = () => {
           productsList.map(list => {
             return (
               <div key={list.id} className="cardContainer">
-                <img
-                  src={list.thumbnail}
-                  alt={list.title}
-                  className="cardImage"
-                />
+                <Link to={`/detail/${list.id}`}>
+                  <img
+                    src={list.thumbnail}
+                    alt={list.title}
+                    className="cardImage"
+                  />
+                </Link>
                 <div className="contentBox">
                   <span>상품명 : {list.title}</span>
                   <span>가격 : $ {list.price}</span>

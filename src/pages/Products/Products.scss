@@ -27,6 +27,10 @@
       .cardImage {
         height: 200px;
         border-radius: 30px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .contentBox {

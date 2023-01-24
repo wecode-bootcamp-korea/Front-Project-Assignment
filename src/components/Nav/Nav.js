@@ -11,7 +11,10 @@ const Nav = () => {
     setSearchText(e.target.value);
   };
 
-  const goToDetail = id => {};
+  const goToDetail = id => {
+    navigate(`/detail/${id}`);
+    setSearchText('');
+  };
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/search?q=')
