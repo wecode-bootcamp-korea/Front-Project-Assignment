@@ -1,3 +1,4 @@
+import { check } from 'prettier';
 import React, { useEffect, useState } from 'react';
 import './Cart.scss';
 
@@ -13,24 +14,50 @@ const Cart = () => {
       });
   }, []);
 
+  console.log(checkList);
+
   const isAllChecked = '';
 
-  const allChecked = () => {};
+  const allChecked = checked => {
+    if (checked) {
+      const idArray = [];
+      cartList.forEach(el => idArray.push(el.id));
+      setCheckList(idArray);
+    } else {
+      setCheckList([]);
+    }
+  };
 
-  const handleCheckBox = id => {};
+  const handleCheckBox = (checked, id) => {
+    if (checked) {
+      setCheckList(prev => [...prev, id]);
+    } else {
+      setCheckList(checkList.filter(item => item !== id));
+    }
+  };
 
   return (
     <div className="cart">
-      <input type="checkbox" checked={isAllChecked} />
+      <input
+        type="checkbox"
+        onChange={e => allChecked(e.target.checked)}
+        checked={checkList.length === cartList.length ? true : false}
+      />
       전체선택
       <div className="line" />
       {cartList.map(product => {
         return (
           <div className="productBox" key={product.id}>
-            <input type="checkbox" checked="" />
-            <span className="title" />
-            <span>$</span>
-            <span>개</span>
+            <input
+              type="checkbox"
+              onChange={e => {
+                handleCheckBox(e.target.checked, product.id);
+              }}
+              checked={checkList.includes(product.id) ? true : false}
+            />
+            <span className="title">{product.title}</span>
+            <span>$ {product.price}</span>
+            <span>{product.quantity}개</span>
           </div>
         );
       })}
