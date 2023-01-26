@@ -36,9 +36,9 @@ const Nav = () => {
             value={searchText}
             onChange={searchProdut}
           />
-          <div className="searchBox">
-            {searchText &&
-              searchList.map(list => {
+          {searchText && (
+            <div className="searchBox">
+              {searchList.map(list => {
                 return (
                   <span
                     key={list.id}
@@ -49,7 +49,8 @@ const Nav = () => {
                   </span>
                 );
               })}
-          </div>
+            </div>
+          )}
         </div>
         <Link className="loginBtn" to="/login">
           로그인
