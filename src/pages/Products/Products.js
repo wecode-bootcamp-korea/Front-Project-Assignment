@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './Products.scss';
 
 const Products = () => {
   const [productsList, setProductsList] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const skip = searchParams.get('skip');
 
   useEffect(() => {
-    fetch('https://dummyjson.com/products?limit=100')
+    fetch(`https://dummyjson.com/products?limit=10&skip=${skip}`)
       .then(res => res.json())
       .then(data => {
         setProductsList(data.products);
         setTotalProduct(Math.floor(data.total / 10));
       });
-  }, []);
+  }, [skip]);
 
   const filterProducts = e => {
     if (e.target.value === 'price') {
@@ -24,6 +28,11 @@ const Products = () => {
       const sortedAsc = [...productsList];
       setProductsList(sortedAsc);
     }
+  };
+
+  const handleClickBtn = num => {
+    searchParams.set('skip', num * 10);
+    setSearchParams(searchParams);
   };
 
   return (
@@ -53,9 +62,22 @@ const Products = () => {
           }
         )}
       </div>
-      <div className="buttonWrap" />
+      <div className="buttonWrap">
+        {BUTTON_LIST.map(num => (
+          <button
+            key={num}
+            onClick={() => {
+              handleClickBtn(num);
+            }}
+          >
+            {num}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default Products;
+
+const BUTTON_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
