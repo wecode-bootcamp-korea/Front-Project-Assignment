@@ -40,7 +40,7 @@ const Detail = () => {
   return (
     <div className="detail">
       <div className="imageContainer">
-        {/* <img src={product.images[0]} alt={product.title} /> */}
+        <img src={product.images && product.images[0]} alt={product.title} />
       </div>
       <div className="productContent">
         <span className="title">{product.title}</span>
