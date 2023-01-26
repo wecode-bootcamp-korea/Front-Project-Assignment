@@ -31,10 +31,9 @@ const Products = () => {
   };
 
   const handleClickBtn = num => {
-    searchParams.set('skip', num * 10);
+    searchParams.set('skip', (num - 1) * 10);
     setSearchParams(searchParams);
   };
-
   return (
     <div className="products">
       <div className="filterContainer">
@@ -46,21 +45,22 @@ const Products = () => {
         </select>
       </div>
       <div className="listWrap">
-        {productsList.map(
-          ({ id, title, price, rating, discountPercentage, thumbnail }) => {
-            return (
-              <div key={id} className="cardContainer">
-                <img src={thumbnail} alt={title} className="cardImage" />
-                <div className="contentBox">
-                  <span>상품명 : {title}</span>
-                  <span>가격 : ${price}</span>
-                  <span>별점 : {rating}</span>
-                  <span>할인율 : {discountPercentage}%</span>
+        {productsList &&
+          productsList.map(
+            ({ id, title, price, rating, discountPercentage, thumbnail }) => {
+              return (
+                <div key={id} className="cardContainer">
+                  <img src={thumbnail} alt={title} className="cardImage" />
+                  <div className="contentBox">
+                    <span>상품명 : {title}</span>
+                    <span>가격 : ${price}</span>
+                    <span>별점 : {rating}</span>
+                    <span>할인율 : {discountPercentage}%</span>
+                  </div>
                 </div>
-              </div>
-            );
-          }
-        )}
+              );
+            }
+          )}
       </div>
       <div className="buttonWrap">
         {BUTTON_LIST.map(num => (

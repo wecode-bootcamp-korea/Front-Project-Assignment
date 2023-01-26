@@ -57,7 +57,7 @@ const Nav = () => {
         </Link>
       </div>
       <div className="menuTab">
-        <Link className="productsLink" to="/products">
+        <Link className="productsLink" to="/products?skip=0">
           상품 리스트
         </Link>
       </div>
