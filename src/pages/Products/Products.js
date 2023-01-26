@@ -14,7 +14,17 @@ const Products = () => {
       });
   }, []);
 
-  const filterProducts = e => {};
+  const filterProducts = e => {
+    if (e.target.value === 'price') {
+      productsList.sort((a, b) => a.price - b.price);
+      const sortedDesc = [...productsList];
+      setProductsList(sortedDesc);
+    } else {
+      productsList.sort((a, b) => b[e.target.value] - a[e.target.value]);
+      const sortedAsc = [...productsList];
+      setProductsList(sortedAsc);
+    }
+  };
 
   return (
     <div className="products">
