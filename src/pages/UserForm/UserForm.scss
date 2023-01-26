@@ -20,9 +20,17 @@
     }
 
     .userInput {
+      width: 200px;
       padding: 5px 10px;
       border: 1px solid lightgray;
       border-radius: 10px;
+    }
+
+    .checkValid {
+      margin-bottom: 0;
+      color: lightskyblue;
+      font-size: 13px;
+      text-align: center;
     }
 
     .formButton {
@@ -31,6 +39,10 @@
       border: 1px solid lightgray;
       border-radius: 10px;
       background-color: white;
+
+      .disabled {
+        color: gray;
+      }
     }
 
     .linkTranslationBtn {
