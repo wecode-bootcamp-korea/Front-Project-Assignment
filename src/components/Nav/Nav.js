@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Nav.scss';
 
 const Nav = () => {
+  const [itemList, setItemList] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [searchList, setSearchList] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/search?q=')
+      .then(res => res.json())
+      .then(res => setItemList(res.products));
+  }, []);
+
   const searchProdut = e => {
     setSearchText(e.target.value);
+    setSearchList(itemList.filter(item => item.title.includes(searchText)));
   };
 
-  const goToDetail = id => {};
+  const goToDetail = id => {
+    navigate(`/detail/${id}`);
+  };
 
   return (
     <nav className="nav">
@@ -27,17 +37,18 @@ const Nav = () => {
             onChange={searchProdut}
           />
           <div className="searchBox">
-            {searchList.map(list => {
-              return (
-                <span
-                  key={list.id}
-                  className="result"
-                  onClick={() => goToDetail(list.id)}
-                >
-                  {list.title}
-                </span>
-              );
-            })}
+            {searchText &&
+              searchList.map(list => {
+                return (
+                  <span
+                    key={list.id}
+                    className="result"
+                    onClick={() => goToDetail(list.id)}
+                  >
+                    {list.title}
+                  </span>
+                );
+              })}
           </div>
         </div>
         <Link className="loginBtn" to="/login">
