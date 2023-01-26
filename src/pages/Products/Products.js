@@ -27,19 +27,21 @@ const Products = () => {
         </select>
       </div>
       <div className="listWrap">
-        {productsList.map(list => {
-          return (
-            <div key={list.id} className="cardContainer">
-              <img alt={list.title} className="cardImage" />
-              <div className="contentBox">
-                <span>상품명 : </span>
-                <span>가격 : $</span>
-                <span>별점 : </span>
-                <span>할인율 : %</span>
+        {productsList.map(
+          ({ id, title, price, rating, discountPercentage, thumbnail }) => {
+            return (
+              <div key={id} className="cardContainer">
+                <img src={thumbnail} alt={title} className="cardImage" />
+                <div className="contentBox">
+                  <span>상품명 : {title}</span>
+                  <span>가격 : ${price}</span>
+                  <span>별점 : {rating}</span>
+                  <span>할인율 : {discountPercentage}%</span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </div>
       <div className="buttonWrap" />
     </div>
