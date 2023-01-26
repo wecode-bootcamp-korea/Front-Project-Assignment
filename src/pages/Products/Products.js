@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './Products.scss';
 
 const Products = () => {
@@ -7,6 +7,7 @@ const Products = () => {
   const [totalProduct, setTotalProduct] = useState(0);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const navigate = useNavigate();
   const skip = searchParams.get('skip');
 
   useEffect(() => {
@@ -34,6 +35,11 @@ const Products = () => {
     searchParams.set('skip', (num - 1) * 10);
     setSearchParams(searchParams);
   };
+
+  const handleClickItem = id => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
     <div className="products">
       <div className="filterContainer">
@@ -49,7 +55,11 @@ const Products = () => {
           productsList.map(
             ({ id, title, price, rating, discountPercentage, thumbnail }) => {
               return (
-                <div key={id} className="cardContainer">
+                <div
+                  key={id}
+                  className="cardContainer"
+                  onClick={handleClickItem}
+                >
                   <img src={thumbnail} alt={title} className="cardImage" />
                   <div className="contentBox">
                     <span>상품명 : {title}</span>
