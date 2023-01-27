@@ -14,7 +14,11 @@ const Detail = () => {
       .then(data => setProduct(data));
   }, [params]);
 
-  const calculateQuantity = e => {};
+  const calculateQuantity = e => {
+    e.target.name === 'plus'
+      ? setQuantity(prev => prev + 1)
+      : quantity > 1 && setQuantity(prev => prev - 1);
+  };
 
   const addCart = () => {
     fetch('https://dummyjson.com/carts/add', {
@@ -24,8 +28,8 @@ const Detail = () => {
         userId: 1,
         products: [
           {
-            id: 1,
-            quantity: 1,
+            id: params,
+            quantity: quantity,
           },
         ],
       }),
@@ -63,7 +67,7 @@ const Detail = () => {
         <span className="price">가격 : ${price}</span>
         <span className="rating">평점 : {rating}</span>
         <div className="handleBox">
-          <span className="quantity"> 수량 : 개</span>
+          <span className="quantity"> 수량 : {quantity}개</span>
           <button
             className="quantityBtn"
             name="plus"
