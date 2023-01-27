@@ -44,28 +44,13 @@ const Detail = () => {
         <img src={thumbnail} alt={product.title} />
       </div>
       <div className="productContent">
-        {/* {PRODUCT_LIST.map(({ id, name }) => {
-          if (id <= 3) {
-            <span className={name} key={id}>
-              {name}
-            </span>;
-          }
-          if (id === 4) {
-            <span className={name} key={id}>
-              가격 : ${name}
-            </span>;
-          }
-          if (id === 5) {
-            <span className={name} key={id}>
-              평점 : {name}
-            </span>;
-          }
-        })} */}
-        <span className="title">{title}</span>
-        <span className="category">{category}</span>
-        <span className="description">{description}</span>
-        <span className="price">가격 : ${price}</span>
-        <span className="rating">평점 : {rating}</span>
+        {PRODUCT_LIST.map(({ id, name, content }) => (
+          <span key={id} className={name}>
+            {name === 'price' || name === 'rating'
+              ? `${content}${product[name]}`
+              : product[name]}
+          </span>
+        ))}
         <div className="handleBox">
           <span className="quantity"> 수량 : {quantity}개</span>
           <button
@@ -97,6 +82,6 @@ const PRODUCT_LIST = [
   { id: 1, name: 'title' },
   { id: 2, name: 'category' },
   { id: 3, name: 'description' },
-  { id: 4, name: 'price' },
-  { id: 5, name: 'rating' },
+  { id: 4, name: 'price', content: '가격: $' },
+  { id: 5, name: 'rating', content: '평점: ' },
 ];
