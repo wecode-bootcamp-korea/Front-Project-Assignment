@@ -29,7 +29,7 @@ const Detail = () => {
         products: [
           {
             id: params,
-            quantity: quantity,
+            quantity,
           },
         ],
       }),
