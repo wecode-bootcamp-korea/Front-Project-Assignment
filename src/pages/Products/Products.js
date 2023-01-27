@@ -58,7 +58,9 @@ const Products = () => {
                 <div
                   key={id}
                   className="cardContainer"
-                  onClick={handleClickItem}
+                  onClick={() => {
+                    handleClickItem(id);
+                  }}
                 >
                   <img src={thumbnail} alt={title} className="cardImage" />
                   <div className="contentBox">
