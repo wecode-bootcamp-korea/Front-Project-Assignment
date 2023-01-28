@@ -24,13 +24,13 @@ const Cart = () => {
       <input type="checkbox" checked={isAllChecked} />
       전체선택
       <div className="line" />
-      {cartList.map(product => {
+      {cartList.map(({ id, price, quantity, title }) => {
         return (
-          <div className="productBox" key={product.id}>
+          <div className="productBox" key={id}>
             <input type="checkbox" checked="" />
-            <span className="title" />
-            <span>$</span>
-            <span>개</span>
+            <span className="title">{title}</span>
+            <span>${price}</span>
+            <span>{quantity}개</span>
           </div>
         );
       })}
