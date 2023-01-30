@@ -19,11 +19,7 @@ const Cart = () => {
     if (checkList.length === cartList.length) {
       setCheckList([]);
     } else {
-      cartList.forEach(item => {
-        checkList.length !== cartList.length &&
-          !checkList[item.id] &&
-          checkList.push(item.id);
-      });
+      setCheckList(cartList.map(item => item.id));
     }
     setIsAllChecked(prev => !prev);
   };
