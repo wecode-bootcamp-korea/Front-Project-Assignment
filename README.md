@@ -7,7 +7,7 @@
 ### 작업 방식
 - 해당 레포를 `clone` 받습니다.
 - 해당 프로젝트를 vsCode로 열고 `npm install`을 합니다.
-- `feature/41-본인이름` 의 branch를 생성 후 작업을 합니다.
+- `feature/기수-본인이름` 의 branch를 생성 후 작업을 합니다. (ex. feature/00-kimgaebal)
 
 ### 과제별 안내 링크
 - 메인 페이지
