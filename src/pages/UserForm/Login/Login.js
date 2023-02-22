@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.scss';
 
-const Login = ({ userData }) => {
+const Login = () => {
   const userId = localStorage.getItem('id');
   const userPasswd = localStorage.getItem('passwd');
   const [inputData, setInputData] = useState({
@@ -21,6 +21,12 @@ const Login = ({ userData }) => {
 
   const isCorrect = inputId === userId && inputPasswd === userPasswd;
 
+  const navigate = useNavigate();
+
+  const goToMain = () => {
+    navigate('/');
+  };
+
   return (
     <form className="login" onChange={handleInput}>
       <span className="title">Login</span>
@@ -36,7 +42,11 @@ const Login = ({ userData }) => {
         type="password"
         placeholder="비밀번호"
       />
-      <button className="formBtn" disabled={isCorrect ? false : true}>
+      <button
+        className="formBtn"
+        disabled={isCorrect ? false : true}
+        onClick={goToMain}
+      >
         Login
       </button>
       <Link to="/signup" className="linkTranslationBtn">

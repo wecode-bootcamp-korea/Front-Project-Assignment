@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Signup.scss';
 
-const Signup = ({ userData, handleInput }) => {
+const Signup = () => {
+  const [userData, setUserData] = useState({
+    id: '',
+    passwd: '',
+    passwdCheck: '',
+    name: '',
+  });
+
+  const handleInput = e => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const { id, passwd, passwdCheck, name } = userData;
   const navigate = useNavigate();
 
@@ -10,7 +24,7 @@ const Signup = ({ userData, handleInput }) => {
 
   const isValid = id !== '' && isSame === true && name !== '';
 
-  const onClickSignup = () => {
+  const goToLogin = () => {
     localStorage.setItem('id', id);
     localStorage.setItem('passwd', passwd);
     navigate('/login');
@@ -54,7 +68,7 @@ const Signup = ({ userData, handleInput }) => {
       <button
         className="formBtn"
         disabled={isValid ? false : true}
-        onClick={onClickSignup}
+        onClick={goToLogin}
       >
         Signup
       </button>

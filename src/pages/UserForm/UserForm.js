@@ -5,29 +5,12 @@ import Signup from './Signup/Signup';
 import './UserForm.scss';
 
 const UserForm = () => {
-  const [userData, setUserData] = useState({
-    id: '',
-    passwd: '',
-    passwdCheck: '',
-    name: '',
-  });
   const location = useLocation();
   const pathName = location.pathname;
 
-  const handleInput = e => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <div className="userForm">
-      {pathName === '/signup' ? (
-        <Signup userData={userData} handleInput={handleInput} />
-      ) : (
-        <Login userData={userData} />
-      )}
+      {pathName === '/signup' ? <Signup /> : <Login />}
     </div>
   );
 };
