@@ -1,0 +1,41 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  gap: 10px;
+
+  .title {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .userInput {
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+  }
+
+  .formBtn {
+    margin-top: 20px;
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: none;
+    }
+  }
+
+  .linkTranslationBtn {
+    margin-top: 10px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+  }
+}
