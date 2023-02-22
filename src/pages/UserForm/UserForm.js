@@ -1,19 +1,33 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import Login from './Login/Login';
+import Signup from './Signup/Signup';
 import './UserForm.scss';
 
 const UserForm = () => {
+  const [userData, setUserData] = useState({
+    id: '',
+    passwd: '',
+    passwdCheck: '',
+    name: '',
+  });
+  const location = useLocation();
+  const pathName = location.pathname;
+
+  const handleInput = e => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className="userForm">
-      <form className="userContainer">
-        <span className="title">Login</span>
-        <input className="userInput" placeholder="아이디" />
-        <input className="userInput" placeholder="비밀번호" />
-        <button className="formButton">Login</button>
-        <Link to="/signup" className="linkTranslationBtn">
-          아직 회원이 아니신가요?
-        </Link>
-      </form>
+      {pathName === '/signup' ? (
+        <Signup userData={userData} handleInput={handleInput} />
+      ) : (
+        <Login userData={userData} />
+      )}
     </div>
   );
 };
