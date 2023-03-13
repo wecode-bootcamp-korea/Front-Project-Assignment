@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Carousel from './Carousel/Carousel';
 import './Main.scss';
 
 const Main = () => {
-  return (
-    <section className="main">
-      <Carousel />
-    </section>
-  );
+  return <section className="main" />;
 };
 
 export default Main;

@@ -1,0 +1,64 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px 40px;
+  border-radius: 10px;
+  gap: 10px;
+
+  .title {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .inputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .userInput {
+      padding: 5px 10px;
+      transition: 0.2s all ease-in-out;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+
+      &:focus {
+        padding: 10px;
+        outline: none;
+      }
+    }
+  }
+
+  .formButton {
+    margin-top: 20px;
+    padding: 10px;
+    transition: 0.2s all ease-in-out;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid white;
+      background-color: black;
+      color: white;
+    }
+  }
+
+  .linkTranslationBtn {
+    margin-top: 10px;
+    transition: 0.2s all ease-in-out;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      color: #ee6b6e;
+    }
+  }
+}

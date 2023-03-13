@@ -62,17 +62,16 @@
         font-weight: 700;
       }
     }
-  }
 
-  .menuTab {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+    .loginModal {
+      width: 400px;
+      height: 500px;
+      border: none;
+      border-radius: 20px;
 
-    .productsLink {
-      font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
+      &::backdrop {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
     }
   }
 }
