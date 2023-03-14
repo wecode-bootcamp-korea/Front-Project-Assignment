@@ -5,34 +5,27 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const imageBox = useRef();
   const imageWidthSize = 50;
+  const isFirstImage = currentIndex !== 0;
+  const isLastImage = currentIndex !== IMAGE_LIST.length - 1;
 
-  const displayNextImage = () => {
-    if (currentIndex !== IMAGE_LIST.length - 1) {
-      imageBox.current.style.transform = `translateX(-${
-        (currentIndex + 1) * imageWidthSize
-      }vw)`;
-      setCurrentIndex(prev => prev + 1);
-    }
-  };
-
-  const displayPrevImage = e => {
-    if (currentIndex !== 0) {
-      imageBox.current.style.transform = `translateX(-${
-        (currentIndex - 1) * imageWidthSize
-      }vw)`;
-      setCurrentIndex(prev => prev - 1);
-    }
+  const handleImageCarousel = value => {
+    imageBox.current.style.transform = `translateX(-${
+      (currentIndex + value) * imageWidthSize
+    }vw)`;
+    setCurrentIndex(prev => prev + value);
   };
 
   return (
     <div className="carousel">
       <h2>위코드 커리큘럼</h2>
       <div className="imageContainer">
-        <button
-          name="left"
-          className="left carouselBtn"
-          onClick={displayPrevImage}
-        >{`<`}</button>
+        {isFirstImage && (
+          <button
+            name="left"
+            className="left carouselBtn"
+            onClick={() => handleImageCarousel(-1)}
+          >{`<`}</button>
+        )}
         <div className="imageBox" ref={imageBox}>
           {IMAGE_LIST.map(number => {
             return (
@@ -46,11 +39,13 @@ const Carousel = () => {
             );
           })}
         </div>
-        <button
-          name="right"
-          className="right carouselBtn"
-          onClick={displayNextImage}
-        >{`>`}</button>
+        {isLastImage && (
+          <button
+            name="right"
+            className="right carouselBtn"
+            onClick={() => handleImageCarousel(1)}
+          >{`>`}</button>
+        )}
       </div>
       <div className="dotContainer">
         {IMAGE_LIST.map(list => {
