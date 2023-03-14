@@ -4,11 +4,12 @@ import './Carousel.scss';
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const imageBox = useRef();
+  const imageWidthSize = 50;
 
   const displayNextImage = () => {
     if (currentIndex !== IMAGE_LIST.length - 1) {
       imageBox.current.style.transform = `translateX(-${
-        (currentIndex + 1) * 100
+        (currentIndex + 1) * imageWidthSize
       }vw)`;
       setCurrentIndex(prev => prev + 1);
     }
@@ -17,7 +18,7 @@ const Carousel = () => {
   const displayPrevImage = e => {
     if (currentIndex !== 0) {
       imageBox.current.style.transform = `translateX(-${
-        (currentIndex - 1) * 100
+        (currentIndex - 1) * imageWidthSize
       }vw)`;
       setCurrentIndex(prev => prev - 1);
     }
@@ -25,7 +26,7 @@ const Carousel = () => {
 
   return (
     <div className="carousel">
-      <h2>캐러셀 구현하기</h2>
+      <h2>위코드 커리큘럼</h2>
       <div className="imageContainer">
         <button
           name="left"
