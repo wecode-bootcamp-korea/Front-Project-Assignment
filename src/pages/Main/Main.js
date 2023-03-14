@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Carousel from './Carousel/Carousel';
+import React from 'react';
 import './Main.scss';
 
 const Main = () => {

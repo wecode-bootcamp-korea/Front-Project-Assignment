@@ -1,7 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Login from '../../pages/components/Login/Login';
-import Signup from '../../pages/components/Signup/Signup';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import './Nav.scss';
 
@@ -9,15 +7,12 @@ const Nav = () => {
   const [searchText, setSearchText] = useState('');
   const [searchList, setSearchList] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const navigate = useNavigate();
-  const dialog = useRef();
 
   const searchProdut = e => {
     setSearchText(e.target.value);
   };
 
   const handleModal = () => {
-    // dialog.current.showModal();
     setIsOpenModal(prev => !prev);
   };
 
