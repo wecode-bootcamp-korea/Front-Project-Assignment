@@ -57,14 +57,30 @@
       }
     }
 
-    .loginBtn {
-      transition: all 0.2s ease-in-out;
-      cursor: pointer;
+    .menuBox {
+      display: flex;
+      gap: 20px;
 
-      &:hover {
-        color: blueviolet;
-        font-size: 16px;
-        font-weight: 700;
+      .loginBtn {
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+          color: blueviolet;
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+
+      .listPageBtn {
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+          color: blueviolet;
+          font-size: 16px;
+          font-weight: 700;
+        }
       }
     }
 

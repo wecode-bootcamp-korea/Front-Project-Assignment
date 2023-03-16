@@ -47,8 +47,11 @@ const Nav = () => {
             </div>
           )}
         </div>
-        <div className="loginBtn" onClick={handleModal}>
-          로그인
+        <div className="menuBox">
+          <div className="loginBtn" onClick={handleModal}>
+            로그인
+          </div>
+          <Link className="listPageBtn" />
         </div>
         {isOpenModal && <Modal setIsOpenModal={setIsOpenModal} />}
       </div>
