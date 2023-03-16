@@ -32,6 +32,7 @@
     }
 
     .subInfo {
+      margin-top: 10px;
       font-size: 20px;
       font-weight: 700;
     }
@@ -39,20 +40,27 @@
     .handleBox {
       display: flex;
       align-items: center;
-      margin-top: 50px;
+      margin: 20px 0;
 
       .quantity {
-        width: 80px;
+        width: 100px;
         font-size: 20px;
         font-weight: 700;
       }
 
       .quantityBtn {
         margin-left: 20px;
+        width: 30px;
+        height: 30px;
         border: none;
         background-color: white;
         font-size: 20px;
         cursor: pointer;
+
+        &:hover {
+          border: 1px solid black;
+          border-radius: 10px;
+        }
       }
     }
 
