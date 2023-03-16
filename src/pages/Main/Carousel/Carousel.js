@@ -10,9 +10,9 @@ const Carousel = () => {
 
   const handleImageCarousel = value => {
     imageBox.current.style.transform = `translateX(-${
-      (currentIndex + value) * imageWidthSize
+      value * imageWidthSize
     }vw)`;
-    setCurrentIndex(prev => prev + value);
+    setCurrentIndex(value);
   };
 
   return (
@@ -23,7 +23,7 @@ const Carousel = () => {
           <button
             name="left"
             className="left carouselBtn"
-            onClick={() => handleImageCarousel(-1)}
+            onClick={() => handleImageCarousel(currentIndex - 1)}
           >{`<`}</button>
         )}
         <div className="imageBox" ref={imageBox}>
@@ -43,7 +43,7 @@ const Carousel = () => {
           <button
             name="right"
             className="right carouselBtn"
-            onClick={() => handleImageCarousel(1)}
+            onClick={() => handleImageCarousel(currentIndex + 1)}
           >{`>`}</button>
         )}
       </div>
