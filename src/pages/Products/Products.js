@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Products.scss';
 
 const Products = () => {
   const [productsList, setProductsList] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
-
-  useEffect(() => {
-    fetch('https://dummyjson.com/products')
-      .then(res => res.json())
-      .then(data => {
-        setProductsList(data.products);
-        setTotalProduct(Math.floor(data.total / 10));
-      });
-  }, []);
 
   const filterProducts = e => {};
 
