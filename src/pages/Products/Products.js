@@ -20,13 +20,13 @@ const Products = () => {
       <div className="listWrap">
         {productsList.map(list => {
           return (
-            <div key={list.id} className="cardContainer">
-              <img alt={list.title} className="cardImage" />
+            <div key={list} className="cardContainer">
+              <img alt={list} src={list} className="cardImage" />
               <div className="contentBox">
-                <span>상품명 : </span>
-                <span>가격 : $</span>
-                <span>별점 : </span>
-                <span>할인율 : %</span>
+                <span>상품명 : {}</span>
+                <span>가격 : {}$</span>
+                <span>별점 : {}</span>
+                <span>할인율 : {}%</span>
               </div>
             </div>
           );
