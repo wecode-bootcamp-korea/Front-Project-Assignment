@@ -3,10 +3,9 @@ import './Cart.scss';
 
 const Cart = () => {
   const [cartList, setCartList] = useState([]);
-  const [checkList, setCheckList] = useState([]);
 
   useEffect(() => {
-    fetch('https://dummyjson.com/carts/1')
+    fetch('')
       .then(res => res.json())
       .then(data => {
         setCartList(data.products);
@@ -15,10 +14,6 @@ const Cart = () => {
 
   const isAllChecked = '';
 
-  const allChecked = () => {};
-
-  const handleCheckBox = id => {};
-
   return (
     <div className="cart">
       <input type="checkbox" checked={isAllChecked} />
@@ -26,9 +21,9 @@ const Cart = () => {
       <div className="line" />
       {cartList.map(product => {
         return (
-          <div className="productBox" key={product.id}>
+          <div className="productBox" key="">
             <input type="checkbox" checked="" />
-            <span className="title" />
+            <span className="title">타이틀</span>
             <span>$</span>
             <span>개</span>
           </div>
