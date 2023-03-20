@@ -1,4 +1,5 @@
 import React from 'react';
+import Account from '../Account/Account';
 import './Login.scss';
 
 const Login = ({ setIsOpenLogin }) => {
@@ -9,24 +10,14 @@ const Login = ({ setIsOpenLogin }) => {
   };
 
   return (
-    <form className="login">
-      <span className="title">Login</span>
-      <div className="inputBox">
-        <input className="userInput" placeholder="아이디" />
-        <input className="userInput" placeholder="비밀번호" />
-      </div>
-      <button className="formButton" onClick={handleLogin}>
-        Login
-      </button>
-      <span
-        className="linkTranslationBtn"
-        onClick={() => {
-          setIsOpenLogin(prev => !prev);
-        }}
-      >
-        아직 회원이 아니신가요?
-      </span>
-    </form>
+    <Account
+      className="login"
+      title="Login"
+      formButton="Login"
+      linkTranslationBtn="아직 회원이 아니신가요?"
+      onClick={handleLogin}
+      onClickTranslationBtn={handleLogin}
+    />
   );
 };
 

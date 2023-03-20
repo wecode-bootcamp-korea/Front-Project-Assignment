@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Account from '../Account/Account';
 import './Signup.scss';
 
 const Signup = ({ setIsOpenLogin }) => {
@@ -14,45 +15,19 @@ const Signup = ({ setIsOpenLogin }) => {
     setSignupInfo(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleLogin = () => {
+    setIsOpenLogin(prev => !prev);
+  };
+
   return (
-    <form className="signup">
-      <span className="title">Signup</span>
-      <div className="inputBox">
-        <input
-          className="userInput"
-          name="name"
-          placeholder="이름"
-          onChange={handleInfo}
-        />
-        <input
-          className="userInput"
-          name="id"
-          placeholder="아이디"
-          onChange={handleInfo}
-        />
-        <input
-          className="userInput"
-          name="password"
-          placeholder="비밀번호"
-          onChange={handleInfo}
-        />
-        <input
-          className="userInput"
-          name="check"
-          placeholder="비밀번호 확인"
-          onChange={handleInfo}
-        />
-      </div>
-      <button className="formButton">Signup</button>
-      <span
-        className="linkTranslationBtn"
-        onClick={() => {
-          setIsOpenLogin(prev => !prev);
-        }}
-      >
-        이미 가입하셨나요?
-      </span>
-    </form>
+    <Account
+      className="signup"
+      title="Signup"
+      formButton="Signup"
+      linkTranslationBtn="이미 가입하셨나요?"
+      onChange={handleInfo}
+      onClickTranslationBtn={handleLogin}
+    />
   );
 };
 
