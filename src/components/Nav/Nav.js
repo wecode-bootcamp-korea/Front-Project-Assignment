@@ -1,22 +1,47 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import './Nav.scss';
 
 const Nav = () => {
   const [searchText, setSearchText] = useState('');
+  const [fetchData, setFetchData] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const navigate = useNavigate();
 
   const searchProdut = e => {
     setSearchText(e.target.value);
+    setSearchList(
+      fetchData.filter(item =>
+        item.title.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
   };
 
   const handleModal = () => {
     setIsOpenModal(prev => !prev);
   };
 
-  const goToDetail = id => {};
+  const goToDetail = id => {
+    navigate(`/detail/${id}`);
+    setSearchText('');
+  };
+
+  const getFetchData = () => {
+    const res = fetch(`https://dummyjson.com/products/search?q=${searchText}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    return res.then(response => response.json());
+  };
+  useEffect(() => {
+    async function getData() {
+      const data = await getFetchData();
+      setFetchData(data.products);
+    }
+    getData();
+  }, []);
 
   return (
     <nav className="nav">

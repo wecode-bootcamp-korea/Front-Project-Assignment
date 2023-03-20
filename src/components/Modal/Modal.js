@@ -14,11 +14,7 @@ const Modal = ({ setIsOpenModal }) => {
       }}
     >
       <div className="modalBox" onClick={e => e.stopPropagation()}>
-        {isOpenLogin ? (
-          <Login setIsOpenLogin={setIsOpenLogin} />
-        ) : (
-          <Signup setIsOpenLogin={setIsOpenLogin} />
-        )}
+        <Login isOpenLogin={isOpenLogin} setIsOpenLogin={setIsOpenLogin} />
       </div>
     </div>
   );
