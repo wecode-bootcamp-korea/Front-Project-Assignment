@@ -53,6 +53,9 @@ const Carousel = () => {
             <div
               key={list}
               className={`dot ${currentIndex === list - 1 && 'current'}`}
+              onClick={() => {
+                handleImageCarousel(list - 1);
+              }}
             />
           );
         })}
