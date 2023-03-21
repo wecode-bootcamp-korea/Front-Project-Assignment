@@ -5,7 +5,27 @@ const Products = () => {
   const [productsList, setProductsList] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
 
-  const filterProducts = e => {};
+  const filterProducts = e => {
+    const newProductList = [...productsList];
+    const value = e.target.value;
+    const arrProductList = setProductsList(newProductList);
+    if (value === 'price') {
+      newProductList.sort(function (a, b) {
+        return a.price - b.price;
+      });
+      arrProductList();
+    } else if (value === 'rating') {
+      newProductList.sort(function (a, b) {
+        return b.rating - a.rating;
+      });
+      arrProductList();
+    } else if (value === 'discountPercentage') {
+      newProductList.sort(function (a, b) {
+        return b.discountPercentage - a.discountPercentage;
+      });
+      arrProductList();
+    }
+  };
 
   useEffect(() => {
     fetch('https://dummyjson.com/products?limit=100', {
