@@ -52,7 +52,9 @@ const Carousel = () => {
           return (
             <div
               key={list}
+              value={list}
               className={`dot ${currentIndex === list - 1 && 'current'}`}
+              onClick={() => handleImageCarousel(list - 1)}
             />
           );
         })}
@@ -60,7 +62,6 @@ const Carousel = () => {
     </div>
   );
 };
-
 export default Carousel;
 
 const IMAGE_LIST = [1, 2, 3, 4, 5];
