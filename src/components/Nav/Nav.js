@@ -47,7 +47,7 @@ const Nav = () => {
             value={searchText}
             onChange={searchProduct}
           />
-          {searchList.length > 0 && (
+          {searchText.length > 0 && searchList.length > 0 && (
             <div className="searchBox">
               {searchList.map(list => {
                 return (
