@@ -8,7 +8,31 @@ const Products = () => {
   const [productsList, setProductsList] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
 
-  const filterProducts = e => {};
+  const filterProducts = e => {
+    const { value } = e.target;
+
+    setProductsList([
+      ...productsList.sort((a, b) => {
+        if (value === 'price') {
+          if (a[value] > b[value]) {
+            return 1;
+          } else if (a[value] < b[value]) {
+            return -1;
+          } else {
+            return 0;
+          }
+        } else {
+          if (a[value] > b[value]) {
+            return -1;
+          } else if (a[value] < b[value]) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      }),
+    ]);
+  };
 
   const getFetchData = async () => {
     await fetch(`https://dummyjson.com/products${queryString}`)
@@ -20,7 +44,7 @@ const Products = () => {
   useEffect(() => {
     getFetchData();
   }, []);
-  console.log(productsList);
+
   return (
     <div className="products">
       <div className="filterContainer">
