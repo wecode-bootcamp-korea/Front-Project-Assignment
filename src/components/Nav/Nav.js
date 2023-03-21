@@ -67,7 +67,9 @@ const Nav = () => {
           <div className="loginBtn" onClick={handleModal}>
             로그인
           </div>
-          <Link className="listPageBtn" />
+          <Link className="listPageBtn" to="/products">
+            상품 리스트
+          </Link>
         </div>
         {isOpenModal && <Modal setIsOpenModal={setIsOpenModal} />}
       </div>

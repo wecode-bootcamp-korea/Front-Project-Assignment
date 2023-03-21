@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Products.scss';
 
 const Products = () => {
@@ -6,6 +6,17 @@ const Products = () => {
   const [totalProduct, setTotalProduct] = useState(0);
 
   const filterProducts = e => {};
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/products?limit=100', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    })
+      .then(response => response.json())
+      .then(data => setProductsList(data.products));
+  }, []);
 
   return (
     <div className="products">
@@ -18,19 +29,21 @@ const Products = () => {
         </select>
       </div>
       <div className="listWrap">
-        {productsList.map(list => {
-          return (
-            <div key={list} className="cardContainer">
-              <img alt={list} src={list} className="cardImage" />
-              <div className="contentBox">
-                <span>상품명 : {}</span>
-                <span>가격 : {}$</span>
-                <span>별점 : {}</span>
-                <span>할인율 : {}%</span>
+        {productsList.map(
+          ({ id, title, thumbnail, price, discountPercentage, rating }) => {
+            return (
+              <div key={id} className="cardContainer">
+                <img alt={title} src={thumbnail} className="cardImage" />
+                <div className="contentBox">
+                  <span>상품명 : {title}</span>
+                  <span>가격 : {price}$</span>
+                  <span>별점 : {rating}</span>
+                  <span>할인율 : {discountPercentage}%</span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </div>
       <div className="buttonWrap" />
     </div>
