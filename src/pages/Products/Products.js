@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './Products.scss';
 
 const Products = () => {
+  const location = useLocation();
+  const queryString = location.search;
   const [productsList, setProductsList] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
 
   const filterProducts = e => {};
 
+  const getFetchData = async () => {
+    await fetch(`https://dummyjson.com/products${queryString}`)
+      .then(res => {
+        if (res.ok) return res.json();
+      })
+      .then(data => setProductsList(data.products));
+  };
+  useEffect(() => {
+    getFetchData();
+  }, []);
+  console.log(productsList);
   return (
     <div className="products">
       <div className="filterContainer">
@@ -18,19 +32,24 @@ const Products = () => {
         </select>
       </div>
       <div className="listWrap">
-        {productsList.map(list => {
-          return (
-            <div key={list} className="cardContainer">
-              <img alt={list} src={list} className="cardImage" />
-              <div className="contentBox">
-                <span>상품명 : {}</span>
-                <span>가격 : {}$</span>
-                <span>별점 : {}</span>
-                <span>할인율 : {}%</span>
+        {productsList &&
+          productsList.map(list => {
+            return (
+              <div key={list.id} className="cardContainer">
+                <img
+                  alt={list.title}
+                  src={list.thumbnail}
+                  className="cardImage"
+                />
+                <div className="contentBox">
+                  <span>상품명 : {list.title}</span>
+                  <span>가격 : {list.price}$</span>
+                  <span>별점 : {list.rating}</span>
+                  <span>할인율 : {list.discountPercentage}%</span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
       <div className="buttonWrap" />
     </div>
