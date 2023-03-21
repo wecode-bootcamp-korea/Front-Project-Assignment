@@ -76,7 +76,7 @@ const Nav = () => {
           <div className="loginBtn" onClick={handleModal}>
             로그인
           </div>
-          <Link className="listPageBtn" to="/products?limit=100">
+          <Link className="listPageBtn" to="/products?limit=10&skip=0">
             상품 리스트
           </Link>
         </div>

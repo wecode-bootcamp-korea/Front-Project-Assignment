@@ -1,12 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import './Products.scss';
 
 const Products = () => {
   const location = useLocation();
   const queryString = location.search;
+  const [searchParams, setSearchParams] = useSearchParams();
   const [productsList, setProductsList] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
+
+  const limit = Number(searchParams.get('limit'));
+
+  const getPageCnt = (totalProduct, limit) => {
+    const result = [];
+    const loop =
+      totalProduct % limit > 0
+        ? totalProduct / limit + 1
+        : totalProduct / limit;
+    for (let i = 1; i <= loop; i++) {
+      result.push(
+        <Link
+          className="pageBtn"
+          to={`/products?limit=10&skip=${(i - 1) * 10}`}
+        >
+          {i}
+        </Link>
+      );
+    }
+    return result;
+  };
 
   const filterProducts = e => {
     const { value } = e.target;
@@ -39,11 +61,14 @@ const Products = () => {
       .then(res => {
         if (res.ok) return res.json();
       })
-      .then(data => setProductsList(data.products));
+      .then(data => {
+        setTotalProduct(data.total);
+        setProductsList(data.products);
+      });
   };
   useEffect(() => {
     getFetchData();
-  }, []);
+  }, [queryString]);
 
   return (
     <div className="products">
@@ -75,7 +100,7 @@ const Products = () => {
             );
           })}
       </div>
-      <div className="buttonWrap" />
+      <div className="buttonWrap">{getPageCnt(totalProduct, limit)}</div>
     </div>
   );
 };
