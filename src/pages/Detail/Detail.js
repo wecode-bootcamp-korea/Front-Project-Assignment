@@ -9,9 +9,10 @@ const Detail = () => {
   const params = useParams();
   const dialogRef = useRef();
   const navigate = useNavigate();
+  const prdId = params.id;
 
   useEffect(() => {
-    fetch('')
+    fetch(`https://dummyjson.com/products/${prdId}`)
       .then(res => res.json())
       .then(data => setProduct(data));
   }, []);
@@ -48,16 +49,16 @@ const Detail = () => {
   return (
     <div className="detail">
       <div className="imageContainer">
-        <img src="" alt="" />
+        <img src={`${product.images[0]}`} alt="prdImg" />
       </div>
       <div className="productContent">
-        <span className="title">타이틀</span>
-        <span className="category">카테고리</span>
-        <span className="description">설명</span>
-        <span className="price">가격 : $</span>
-        <span className="subInfo">평점 : </span>
+        <span className="title">{product.title}</span>
+        <span className="category">{product.category}</span>
+        <span className="description">{product.description}</span>
+        <span className="price">가격 : ${product.price}$</span>
+        <span className="subInfo">평점 : ${product.rating}</span>
         <div className="handleBox">
-          <span className="quantity"> 수량 : 개</span>
+          <span className="quantity"> 수량 : {quantity}개</span>
           <button
             className="quantityBtn"
             name="plus"
