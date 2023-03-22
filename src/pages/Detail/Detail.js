@@ -14,10 +14,25 @@ const Detail = () => {
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${prdId}`)
       .then(res => res.json())
-      .then(data => setProduct(data));
+      .then(data => {
+        setProduct(data);
+      });
   }, []);
 
-  const calculateQuantity = () => {};
+  const calculateQuantity = e => {
+    const { name } = e.target;
+    if (name === 'plus') {
+      if (quantity >= product.stock) {
+        alert('최대 수량입니다.');
+        return;
+      } else {
+        setQuantity(prev => prev + 1);
+      }
+    } else {
+      if (quantity === 1) return;
+      else setQuantity(prev => prev - 1);
+    }
+  };
 
   const handleModal = e => {
     if (e.target.value === 'close') return;
@@ -25,15 +40,15 @@ const Detail = () => {
   };
 
   const addCart = () => {
-    fetch('', {
-      method: '',
+    fetch('https://dummyjson.com/carts/add', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userId: 1,
         products: [
           {
-            id: '',
-            quantity: '',
+            id: `${prdId}`,
+            quantity: `${quantity}`,
           },
         ],
       }),
@@ -49,7 +64,7 @@ const Detail = () => {
   return (
     <div className="detail">
       <div className="imageContainer">
-        <img src={`${product.images[0]}`} alt="prdImg" />
+        <img src={`${product.images && product.images[0]}`} alt="prdImg" />
       </div>
       <div className="productContent">
         <span className="title">{product.title}</span>
