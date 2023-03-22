@@ -6,17 +6,36 @@ const Detail = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
 
+  const [loading, setLoading] = useState(true);
+  const [imageSrc, setImageSrc] = useState('');
+
+  const { id, title, category, price, rating, description, stock } = product;
+
   const params = useParams();
   const dialogRef = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('')
+    fetch(`https://dummyjson.com/products/${params.id}`)
       .then(res => res.json())
-      .then(data => setProduct(data));
+      .then(data => {
+        setLoading(false);
+        setProduct(data);
+        setImageSrc(`${data.images[0]}`);
+        console.log(data.images);
+      });
   }, []);
 
-  const calculateQuantity = () => {};
+  if (loading) return <>Loading.... </>;
+
+  const calculateQuantity = e => {
+    if (e.target.name === 'plus') {
+      if (quantity === stock) return alert('최대 수량입니다');
+      setQuantity(quantity + 1);
+    } else if (e.target.name === 'minus') {
+      quantity === 1 ? setQuantity(1) : setQuantity(quantity - 1);
+    } else alert('calculate failed');
+  };
 
   const handleModal = e => {
     if (e.target.value === 'close') return;
@@ -24,15 +43,15 @@ const Detail = () => {
   };
 
   const addCart = () => {
-    fetch('', {
-      method: '',
+    fetch('https://dummyjson.com/carts/add', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userId: 1,
         products: [
           {
-            id: '',
-            quantity: '',
+            id,
+            quantity,
           },
         ],
       }),
@@ -42,22 +61,23 @@ const Detail = () => {
         if (data.id) {
           dialogRef.current.showModal();
         }
+        console.log(data);
       });
   };
 
   return (
     <div className="detail">
       <div className="imageContainer">
-        <img src="" alt="" />
+        <img src={`${imageSrc}`} alt="images" />
       </div>
       <div className="productContent">
-        <span className="title">타이틀</span>
-        <span className="category">카테고리</span>
-        <span className="description">설명</span>
-        <span className="price">가격 : $</span>
-        <span className="subInfo">평점 : </span>
+        <span className="title">{title}</span>
+        <span className="category">{category}</span>
+        <span className="description">{description}</span>
+        <span className="price">가격 : {price}$</span>
+        <span className="subInfo">평점 : {rating}</span>
         <div className="handleBox">
-          <span className="quantity"> 수량 : 개</span>
+          <span className="quantity"> 수량 : {quantity}개</span>
           <button
             className="quantityBtn"
             name="plus"

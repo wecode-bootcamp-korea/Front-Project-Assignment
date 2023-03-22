@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Login from '../../pages/components/Login/Login';
 import Signup from '../../pages/components/Signup/Signup';
+// import Account from '../../pages/components/Account/Account';
 import './Modal.scss';
 
 const Modal = ({ setIsOpenModal }) => {
@@ -14,6 +15,8 @@ const Modal = ({ setIsOpenModal }) => {
       }}
     >
       <div className="modalBox" onClick={e => e.stopPropagation()}>
+        {/* <Account isOpenLogin={isOpenLogin} setIsOpenLogin={setIsOpenLogin} /> */}
+
         {isOpenLogin ? (
           <Login setIsOpenLogin={setIsOpenLogin} />
         ) : (

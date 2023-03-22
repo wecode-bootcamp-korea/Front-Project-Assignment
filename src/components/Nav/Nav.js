@@ -8,7 +8,7 @@ const Nav = () => {
   const [searchList, setSearchList] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const searchProdut = e => {
+  const searchProduct = e => {
     setSearchText(e.target.value);
   };
 
@@ -16,7 +16,13 @@ const Nav = () => {
     setIsOpenModal(prev => !prev);
   };
 
-  const goToDetail = id => {};
+  const goToDetail = id => {
+    fetch(`https://dummyjson.com/products/search?q=${searchText}`, {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => setSearchText(data));
+  };
 
   return (
     <nav className="nav">
@@ -29,7 +35,7 @@ const Nav = () => {
             className="searchInput"
             placeholder="검색"
             value={searchText}
-            onChange={searchProdut}
+            onChange={searchProduct}
           />
           {searchText.length > 0 && (
             <div className="searchBox">
