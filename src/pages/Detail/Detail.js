@@ -7,14 +7,15 @@ const Detail = () => {
   const [quantity, setQuantity] = useState(1);
 
   const params = useParams();
+  const productId = params.id;
   const dialogRef = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('')
+    fetch(`https://dummyjson.com/products/${productId}`)
       .then(res => res.json())
       .then(data => setProduct(data));
-  }, []);
+  }, [productId]);
 
   const calculateQuantity = () => {};
 
@@ -48,16 +49,16 @@ const Detail = () => {
   return (
     <div className="detail">
       <div className="imageContainer">
-        <img src="" alt="" />
+        <img src={`${product.images && product.images[0]}`} alt="" />
       </div>
       <div className="productContent">
-        <span className="title">타이틀</span>
-        <span className="category">카테고리</span>
-        <span className="description">설명</span>
-        <span className="price">가격 : $</span>
-        <span className="subInfo">평점 : </span>
+        <span className="title">{product.title}</span>
+        <span className="category">{product.title}</span>
+        <span className="description">{product.discountPercentage}</span>
+        <span className="price">가격 : {product.price}$</span>
+        <span className="subInfo">평점 : {product.rating}</span>
         <div className="handleBox">
-          <span className="quantity"> 수량 : 개</span>
+          <span className="quantity"> 수량 : {quantity}개</span>
           <button
             className="quantityBtn"
             name="plus"
