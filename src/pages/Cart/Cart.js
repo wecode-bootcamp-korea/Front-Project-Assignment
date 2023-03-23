@@ -5,7 +5,7 @@ const Cart = () => {
   const [cartList, setCartList] = useState([]);
 
   useEffect(() => {
-    fetch('')
+    fetch('https://dummyjson.com/carts/1')
       .then(res => res.json())
       .then(data => {
         setCartList(data.products);
@@ -19,13 +19,13 @@ const Cart = () => {
       <input type="checkbox" checked={isAllChecked} />
       전체선택
       <div className="line" />
-      {cartList.map(product => {
+      {cartList.map(({ id, title, price, quantity }) => {
         return (
-          <div className="productBox" key="">
-            <input type="checkbox" checked="" />
-            <span className="title">타이틀</span>
-            <span>$</span>
-            <span>개</span>
+          <div className="productBox" key={id}>
+            <input type="checkbox" checked={isAllChecked} />
+            <span className="title">{title}</span>
+            <span>${price}</span>
+            <span>{quantity}개</span>
           </div>
         );
       })}
