@@ -8,6 +8,7 @@ const Detail = () => {
 
   const params = useParams();
   const productId = params.id;
+
   const dialogRef = useRef();
   const navigate = useNavigate();
 
@@ -17,7 +18,16 @@ const Detail = () => {
       .then(data => setProduct(data));
   }, [productId]);
 
-  const calculateQuantity = () => {};
+  const calculateQuantity = e => {
+    const target = e.target.name;
+    if (target === 'plus' && quantity < product.stock) {
+      setQuantity(item => item + 1);
+    } else if (quantity === product.stock) {
+      alert('최대 수량입니다.');
+    } else if (target === 'minus' && quantity > 1) {
+      setQuantity(item => item - 1);
+    }
+  };
 
   const handleModal = e => {
     if (e.target.value === 'close') return;
@@ -53,7 +63,7 @@ const Detail = () => {
       </div>
       <div className="productContent">
         <span className="title">{product.title}</span>
-        <span className="category">{product.title}</span>
+        <span className="category">{product.category}</span>
         <span className="description">{product.discountPercentage}</span>
         <span className="price">가격 : {product.price}$</span>
         <span className="subInfo">평점 : {product.rating}</span>
